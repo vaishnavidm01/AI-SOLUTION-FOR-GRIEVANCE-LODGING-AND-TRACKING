@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lodge Grievance | JanSeva AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="navbar">
+
+    <div class="logo-area">
+
+        <div class="logo-icon">
+            🏛️
+        </div>
+
+        <div>
+            <h2>JanSeva AI</h2>
+            <span>Smart Grievance Management</span>
+        </div>
+
+    </div>
+
+    <nav>
+
+        <a href="/">Home</a>
+        <a href="/#services">Services</a>
+        <a href="/#how">How It Works</a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= PAGE HEADER ================= -->
+
+<section class="lodge-header">
+
+    <div>
+
+        <span class="small-title">
+            CITIZEN SERVICES
+        </span>
+
+        <h1>
+            Lodge a Grievance
+        </h1>
+
+        <p>
+            Tell us about the civic issue you have noticed.
+            Our system will help analyse and track your complaint.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FORM SECTION ================= -->
+
+<section class="lodge-section">
+
+    <div class="lodge-container">
+
+
+        <!-- LEFT INFORMATION -->
+
+        <div class="lodge-info">
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AI-Assisted Analysis
+                </h3>
+
+                <p>
+                    Your complaint can be analysed to identify
+                    the appropriate category and severity.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    📍
+                </div>
+
+                <h3>
+                    Location Based Reporting
+                </h3>
+
+                <p>
+                    Providing the location helps authorities
+                    identify where the issue needs attention.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🎫
+                </div>
+
+                <h3>
+                    Track Your Complaint
+                </h3>
+
+                <p>
+                    After submitting your grievance, you can
+                    use your grievance ID to track its progress.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="grievance-form-card">
+
+            <div class="form-heading">
+
+                <span class="small-title">
+                    STEP 1
+                </span>
+
+                <h2>
+                    Tell us about the problem
+                </h2>
+
+                <p>
+                    Please provide accurate information.
+                </p>
+
+            </div>
+
+
+            <form
+                action="/lodge"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Issue Category
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+
+                        <option value="">
+                            Select an issue
+                        </option>
+
+                        <option value="Road Maintenance">
+                            🛣️ Road Maintenance
+                        </option>
+
+                        <option value="Water Leakage">
+                            💧 Water Leakage
+                        </option>
+
+                        <option value="Garbage / Sanitation">
+                            🗑️ Garbage / Sanitation
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Describe the Issue
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="6"
+                        placeholder="Example: There is a large pothole near the main road..."
+                        required
+                    ></textarea>
+
+                    <small>
+                        Please provide as much useful information as possible.
+                    </small>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="form-group">
+
+                    <label for="location">
+                        📍 Location
+                    </label>
+
+                    <div class="location-input">
+
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Enter the location of the issue"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            onclick="getLocation()"
+                        >
+                            Detect
+                        </button>
+
+                    </div>
+
+                    <small id="location-status">
+                        You can enter the location manually.
+                    </small>
+
+                </div>
+
+
+                <!-- IMAGE -->
+
+                <div class="form-group">
+
+                    <label for="image">
+                        📷 Upload Image
+                    </label>
+
+                    <div class="upload-area">
+
+                        <div class="upload-icon">
+                            📸
+                        </div>
+
+                        <h4>
+                            Upload a photo of the issue
+                        </h4>
+
+                        <p>
+                            JPG, JPEG or PNG
+                        </p>
+
+                        <input
+                            type="file"
+                            id="image"
+                            name="image"
+                            accept="image/*"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="submit-grievance"
+                >
+                    Submit Grievance →
+                </button>
+
+
+                <p class="privacy-note">
+                    🔒 Your submitted information is used only
+                    for grievance processing and tracking.
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                🏛️
+            </div>
+
+            <div>
+                <h3>JanSeva AI</h3>
+
+                <p>
+                    AI-powered grievance lodging
+                    and tracking system.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/#services">
+                Services
+            </a>
+
+            <a href="/#how">
+                How It Works
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 JanSeva AI
+        </span>
+
+        <span>
+            Built for smarter civic services.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= LOCATION SCRIPT ================= -->
+
+<script>
+
+function getLocation() {
+
+    const status = document.getElementById("location-status");
+
+    if (!navigator.geolocation) {
+
+        status.innerText =
+            "Location detection is not supported by your browser.";
+
+        return;
+    }
+
+    status.innerText = "Detecting your location...";
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            document.getElementById("location").value =
+                latitude + ", " + longitude;
+
+            status.innerText =
+                "✓ Location detected successfully.";
+
+        },
+
+        function() {
+
+            status.innerText =
+                "Unable to detect location. Please enter it manually.";
+
+        }
+
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JanSeva AI | Smart Civic Grievance Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="brand">
+
+            <div class="brand-mark">
+                JS
+            </div>
+
+            <div class="brand-text">
+
+                <strong>JanSeva</strong>
+
+                <span>AI</span>
+
+            </div>
+
+        </a>
+
+
+        <nav class="nav-menu">
+
+            <a href="/" class="active">
+                Home
+            </a>
+
+            <a href="#services">
+                Services
+            </a>
+
+            <a href="#how-it-works">
+                How It Works
+            </a>
+
+            <a href="#track">
+                Track Complaint
+            </a>
+
+        </nav>
+
+
+        <a href="/lodge" class="nav-button">
+
+            Lodge Complaint
+
+            <span>→</span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero-section">
+
+    <div class="hero-container">
+
+
+        <!-- LEFT -->
+
+        <div class="hero-content">
+
+            <div class="hero-tag">
+
+                <span class="tag-dot"></span>
+
+                AI-POWERED CIVIC PLATFORM
+
+            </div>
+
+
+            <h1>
+
+                Making Your City
+
+                <span>Better, Together.</span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Report civic problems, track your complaints,
+                and help authorities create cleaner, safer
+                and better communities.
+
+            </p>
+
+
+            <div class="hero-actions">
+
+                <a href="/lodge"
+                   class="primary-button">
+
+                    Lodge a Complaint
+
+                    <span>→</span>
+
+                </a>
+
+
+                <a href="#how-it-works"
+                   class="text-button">
+
+                    See How It Works
+
+                    <span>↓</span>
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-trust">
+
+                <div class="trust-item">
+
+                    <strong>24/7</strong>
+
+                    <span>Complaint Reporting</span>
+
+                </div>
+
+
+                <div class="trust-line"></div>
+
+
+                <div class="trust-item">
+
+                    <strong>AI</strong>
+
+                    <span>Smart Analysis</span>
+
+                </div>
+
+
+                <div class="trust-line"></div>
+
+
+                <div class="trust-item">
+
+                    <strong>100%</strong>
+
+                    <span>Trackable</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RIGHT VISUAL -->
+
+        <div class="hero-visual">
+
+
+            <div class="visual-glow"></div>
+
+
+            <div class="city-card">
+
+
+                <div class="city-top">
+
+                    <div>
+
+                        <span class="small-label">
+                            CIVIC DASHBOARD
+                        </span>
+
+                        <h3>
+                            City Overview
+                        </h3>
+
+                    </div>
+
+
+                    <div class="live-status">
+
+                        <span></span>
+
+                        LIVE
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CITY ILLUSTRATION -->
+
+                <div class="city-scene">
+
+
+                    <div class="sun"></div>
+
+
+                    <div class="cloud cloud-one"></div>
+
+                    <div class="cloud cloud-two"></div>
+
+
+                    <div class="building building-one">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </div>
+
+
+                    <div class="building building-two">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </div>
+
+
+                    <div class="building building-three">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </div>
+
+
+                    <div class="road">
+
+                        <div class="road-line"></div>
+
+                    </div>
+
+
+                    <div class="tree tree-one"></div>
+
+                    <div class="tree tree-two"></div>
+
+
+                    <div class="car"></div>
+
+
+                </div>
+
+
+
+                <!-- DASHBOARD STATS -->
+
+                <div class="dashboard-stats">
+
+
+                    <div class="dashboard-stat">
+
+                        <div class="stat-icon blue">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>1,248</strong>
+
+                            <span>Resolved</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-stat">
+
+                        <div class="stat-icon orange">
+                            !
+                        </div>
+
+                        <div>
+
+                            <strong>186</strong>
+
+                            <span>In Progress</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-stat">
+
+                        <div class="stat-icon green">
+                            AI
+                        </div>
+
+                        <div>
+
+                            <strong>94%</strong>
+
+                            <span>AI Accuracy</span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- FLOATING CARD -->
+
+            <div class="floating-card">
+
+                <div class="floating-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        Complaint Tracked
+                    </strong>
+
+                    <span>
+                        GRV-82A4F91C
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="services-section"
+         id="services">
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <span>
+                WHAT YOU CAN REPORT
+            </span>
+
+            <h2>
+                One Platform. Multiple Civic Issues.
+            </h2>
+
+            <p>
+                Report everyday civic problems directly
+                through a simple and transparent system.
+            </p>
+
+        </div>
+
+
+
+        <div class="service-grid">
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    01
+                </div>
+
+                <div class="service-icon road-icon">
+                    ◒
+                </div>
+
+                <h3>
+                    Road Maintenance
+                </h3>
+
+                <p>
+                    Report potholes, damaged roads,
+                    broken surfaces and unsafe
+                    road conditions.
+                </p>
+
+                <a href="/lodge">
+                    Report Issue →
+                </a>
+
+            </div>
+
+
+
+            <div class="service-card featured">
+
+                <div class="service-number">
+                    02
+                </div>
+
+                <div class="service-icon water-icon">
+                    ◇
+                </div>
+
+                <h3>
+                    Water Leakage
+                </h3>
+
+                <p>
+                    Report leaking pipelines,
+                    water wastage and damaged
+                    water infrastructure.
+                </p>
+
+                <a href="/lodge">
+                    Report Issue →
+                </a>
+
+            </div>
+
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    03
+                </div>
+
+                <div class="service-icon waste-icon">
+                    □
+                </div>
+
+                <h3>
+                    Garbage & Sanitation
+                </h3>
+
+                <p>
+                    Report garbage accumulation,
+                    overflowing waste and
+                    sanitation problems.
+                </p>
+
+                <a href="/lodge">
+                    Report Issue →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section class="process-section"
+         id="how-it-works">
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <span>
+                SIMPLE PROCESS
+            </span>
+
+            <h2>
+                From Report to Resolution
+            </h2>
+
+            <p>
+                JanSeva AI makes civic complaint
+                management simple and transparent.
+            </p>
+
+        </div>
+
+
+
+        <div class="process-grid">
+
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    01
+                </div>
+
+                <h3>
+                    Submit
+                </h3>
+
+                <p>
+                    Describe the civic problem,
+                    add its location and upload
+                    an image if available.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    02
+                </div>
+
+                <h3>
+                    AI Analysis
+                </h3>
+
+                <p>
+                    Our AI analyzes the complaint
+                    and helps identify its
+                    severity and category.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    03
+                </div>
+
+                <h3>
+                    Department
+                </h3>
+
+                <p>
+                    The grievance can be directed
+                    towards the appropriate
+                    civic department.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    04
+                </div>
+
+                <h3>
+                    Track
+                </h3>
+
+                <p>
+                    Use your unique grievance ID
+                    to follow the progress of
+                    your complaint.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TRACK
+===================================================== -->
+
+<section class="track-section"
+         id="track">
+
+    <div class="track-container">
+
+
+        <div class="track-left">
+
+            <span>
+                TRACK YOUR GRIEVANCE
+            </span>
+
+            <h2>
+                Your Complaint.
+                <br>
+                Your Information.
+            </h2>
+
+            <p>
+                Enter your grievance ID to view
+                the latest available status
+                of your complaint.
+            </p>
+
+        </div>
+
+
+        <div class="track-box">
+
+            <div class="track-box-header">
+
+                <div class="track-box-icon">
+                    →
+                </div>
+
+                <div>
+
+                    <strong>
+                        Track Complaint
+                    </strong>
+
+                    <span>
+                        Enter your grievance ID below
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <form action="/track"
+                  method="POST">
+
+                <input
+                    type="text"
+                    name="grievance_id"
+                    placeholder="GRV-XXXXXXXX"
+                    required
+                >
+
+                <button type="submit">
+                    Track Now
+                </button>
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+
+        <div class="footer-brand">
+
+            <div class="brand">
+
+                <div class="brand-mark">
+                    JS
+                </div>
+
+                <div class="brand-text">
+
+                    <strong>JanSeva</strong>
+
+                    <span>AI</span>
+
+                </div>
+
+            </div>
+
+
+            <p>
+                Technology for better civic
+                participation and smarter cities.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="#services">
+                Services
+            </a>
+
+            <a href="#how-it-works">
+                How It Works
+            </a>
+
+            <a href="/lodge">
+                Lodge Complaint
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 JanSeva AI. All rights reserved.
+        </p>
+
+        <p>
+            Smart Civic Grievance Management
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

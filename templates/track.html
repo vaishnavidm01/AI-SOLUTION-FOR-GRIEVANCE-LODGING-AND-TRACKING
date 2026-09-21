@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Track Grievance | JanSeva AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+         ========================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <span>✦</span>
+
+            JanSeva AI
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/lodge">
+                Lodge Complaint
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         TRACK PAGE
+         ========================= -->
+
+    <section class="track-page">
+
+        <div class="track-card">
+
+
+            <div class="track-icon">
+                🔎
+            </div>
+
+
+            <h1>
+                Track Your Grievance
+            </h1>
+
+
+            <p>
+                Enter your grievance ID to check
+                the current status of your complaint.
+            </p>
+
+
+
+            <!-- TRACK FORM -->
+
+            <form action="/track"
+                  method="POST">
+
+
+                <label>
+                    Grievance ID
+                </label>
+
+
+                <input
+                    type="text"
+                    name="grievance_id"
+                    placeholder="Example: GRV-A1B2C3D4"
+                    required
+                >
+
+
+                <button type="submit">
+
+                    Track Complaint
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- ERROR MESSAGE -->
+
+            {% if error %}
+
+            <div class="track-error">
+
+                {{ error }}
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- GRIEVANCE RESULT -->
+
+            {% if grievance %}
+
+
+            <div class="grievance-result">
+
+
+                <h2>
+                    Grievance Details
+                </h2>
+
+
+
+                <div class="result-row">
+
+                    <span>
+                        Grievance ID
+                    </span>
+
+                    <strong>
+                        {{ grievance["grievance_id"] }}
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span>
+                        Category
+                    </span>
+
+                    <strong>
+                        {{ grievance["category"] }}
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span>
+                        Description
+                    </span>
+
+                    <strong>
+                        {{ grievance["description"] }}
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span>
+                        Location
+                    </span>
+
+                    <strong>
+                        {{ grievance["location"] }}
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong class="status-badge">
+
+                        {{ grievance["status"] }}
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span>
+                        Severity
+                    </span>
+
+                    <strong>
+
+                        {{ grievance["severity"] }}
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+
+    <footer class="footer">
+
+        <p>
+
+            © 2026 JanSeva AI.
+            AI-powered civic grievance management.
+
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
