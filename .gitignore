@@ -2,3 +2,7 @@ venv/
 __pycache__/
 *.pyc
 .env
+dataset/bmc_train.csv
+.idea/
+__pycache__/
+*.pyc
