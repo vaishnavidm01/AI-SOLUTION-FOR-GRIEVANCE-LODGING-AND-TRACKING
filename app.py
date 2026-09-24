@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 from flask_cors import CORS
 import uuid
+import joblib
 
 from database.db import init_db, insert_grievance, get_connection
-
+nlp_model = joblib.load("ai/models/nlp_category_model.pkl")
 app = Flask(__name__)
 CORS(app)
 
@@ -29,9 +30,12 @@ def lodge():
 
     if request.method == "POST":
 
-        category = request.form.get("category")
         description = request.form.get("description")
         location = request.form.get("location")
+
+        # Predict complaint category using NLP model
+        category = nlp_model.predict([description])[0]
+        print("AI Predicted Category:", category)
 
         image = request.files.get("image")
 

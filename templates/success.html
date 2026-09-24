@@ -1,163 +1,54 @@
-/* =========================
-   SUCCESS PAGE
-========================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grievance Submitted</title>
 
-.success-page {
-    min-height: 650px;
-    padding: 80px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
 
-    background:
-        radial-gradient(circle at 20% 20%, #e5f8f0, transparent 28%),
-        radial-gradient(circle at 80% 80%, #e9e5ff, transparent 30%),
-        #f7f9fc;
-}
+<body>
 
-.success-card {
-    width: 100%;
-    max-width: 650px;
-    background: white;
-    padding: 55px;
-    border-radius: 28px;
-    text-align: center;
-    border: 1px solid #e7ebf3;
-    box-shadow: 0 25px 70px rgba(39, 58, 100, 0.12);
-}
+<div class="success-page">
 
-.success-icon {
-    width: 75px;
-    height: 75px;
-    margin: 0 auto 22px;
+    <div class="success-card">
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        <div class="success-icon">✓</div>
 
-    border-radius: 50%;
+        <div class="success-label">SUBMISSION SUCCESSFUL</div>
 
-    background: #e4f8ee;
-    color: #28a56f;
+        <h1>Grievance Submitted</h1>
 
-    font-size: 40px;
-    font-weight: 700;
-}
+        <p>
+            Your grievance has been successfully registered.
+            Please save your grievance ID to track its status.
+        </p>
 
-.success-label {
-    color: #28a56f;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-}
+        <div class="grievance-id-box">
+            <span>YOUR GRIEVANCE ID</span>
 
-.success-card h1 {
-    color: #1c2a48;
-    font-size: 42px;
-    margin: 10px 0;
-}
+            <strong>{{ grievance_id }}</strong>
 
-.success-card > p {
-    color: #78859b;
-    font-size: 14px;
-    line-height: 1.7;
-    max-width: 500px;
-    margin: 0 auto 30px;
-}
+            <small>Keep this ID safe for future tracking.</small>
+        </div>
 
+        <div class="success-actions">
+            <a href="/" class="success-home">Go Home</a>
 
-/* GRIEVANCE ID */
+            <a href="/lodge" class="success-lodge">
+                Lodge Another
+            </a>
+        </div>
 
-.grievance-id-box {
-    background: linear-gradient(135deg, #f0f3ff, #f7f3ff);
-    border: 1px solid #dfe5ff;
-    border-radius: 17px;
-    padding: 25px;
-}
+        <div class="success-note">
+            Your complaint has been stored in the grievance database.
+        </div>
 
-.grievance-id-box span {
-    display: block;
-    color: #6e7a91;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.2px;
-}
+    </div>
 
-.grievance-id-box strong {
-    display: block;
-    color: #315bea;
-    font-size: 28px;
-    letter-spacing: 2px;
-    margin: 8px 0;
-}
+</div>
 
-.grievance-id-box small {
-    color: #8994a8;
-    font-size: 10px;
-}
-
-
-/* BUTTONS */
-
-.success-actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 28px;
-}
-
-.success-home,
-.success-lodge {
-    padding: 13px 20px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.success-home {
-    color: #315bea;
-    border: 1px solid #dce3f5;
-    background: white;
-}
-
-.success-lodge {
-    color: white;
-    background: linear-gradient(135deg, #315bea, #6c56e8);
-    box-shadow: 0 8px 20px rgba(49, 91, 234, 0.20);
-}
-
-
-/* NOTE */
-
-.success-note {
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #edf0f5;
-
-    color: #8994a8;
-    font-size: 10px;
-    line-height: 1.6;
-}
-
-
-/* MOBILE */
-
-@media (max-width: 600px) {
-
-    .success-card {
-        padding: 35px 22px;
-    }
-
-    .success-card h1 {
-        font-size: 34px;
-    }
-
-    .success-actions {
-        flex-direction: column;
-    }
-
-    .success-home,
-    .success-lodge {
-        width: 100%;
-    }
-}
+</body>
+</html>
