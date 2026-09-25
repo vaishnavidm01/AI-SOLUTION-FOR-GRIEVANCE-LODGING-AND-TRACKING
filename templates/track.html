@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -13,241 +11,187 @@
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
-
 </head>
-
 
 <body>
 
+<header class="navbar">
 
-    <!-- =========================
-         NAVBAR
-         ========================= -->
+    <div class="logo-area">
 
-    <nav class="navbar">
-
-        <div class="logo">
-
-            <span>✦</span>
-
-            JanSeva AI
-
+        <div class="logo-icon">
+            JS
         </div>
 
-
-        <div class="nav-links">
-
-            <a href="/">Home</a>
-
-            <a href="/lodge">
-                Lodge Complaint
-            </a>
-
+        <div>
+            <h2>JanSeva AI</h2>
+            <span>Smart Grievance Management</span>
         </div>
 
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/lodge">Lodge Complaint</a>
     </nav>
 
+</header>
 
 
-    <!-- =========================
-         TRACK PAGE
-         ========================= -->
+<section class="track-page">
 
-    <section class="track-page">
+    <div class="track-card">
 
-        <div class="track-card">
+        <div class="track-heading">
 
-
-            <div class="track-icon">
-                🔎
+            <div class="track-label">
+                GRIEVANCE SERVICES
             </div>
 
-
-            <h1>
-                Track Your Grievance
-            </h1>
-
+            <h1>Track Your Grievance</h1>
 
             <p>
-                Enter your grievance ID to check
-                the current status of your complaint.
+                Enter your grievance ID to check the current
+                status and details of your complaint.
             </p>
 
+        </div>
 
 
-            <!-- TRACK FORM -->
+        <form action="/track"
+              method="POST"
+              class="track-form">
 
-            <form action="/track"
-                  method="POST">
+            <div class="track-input-group">
 
-
-                <label>
+                <label for="grievance_id">
                     Grievance ID
                 </label>
 
-
                 <input
                     type="text"
+                    id="grievance_id"
                     name="grievance_id"
                     placeholder="Example: GRV-A1B2C3D4"
                     required
                 >
 
-
-                <button type="submit">
-
-                    Track Complaint
-
-                </button>
-
-
-            </form>
-
-
-
-            <!-- ERROR MESSAGE -->
-
-            {% if error %}
-
-            <div class="track-error">
-
-                {{ error }}
-
             </div>
 
-            {% endif %}
+            <button type="submit" class="track-button">
+                Track Complaint
+            </button>
+
+        </form>
 
 
+        {% if error %}
 
-            <!-- GRIEVANCE RESULT -->
+        <div class="track-error">
+            {{ error }}
+        </div>
 
-            {% if grievance %}
-
-
-            <div class="grievance-result">
-
-
-                <h2>
-                    Grievance Details
-                </h2>
+        {% endif %}
 
 
+        {% if grievance %}
 
-                <div class="result-row">
+        <div class="grievance-result">
 
-                    <span>
-                        Grievance ID
-                    </span>
+            <div class="result-heading">
 
-                    <strong>
-                        {{ grievance["grievance_id"] }}
-                    </strong>
+                <span>
+                    GRIEVANCE INFORMATION
+                </span>
 
-                </div>
-
-
-
-                <div class="result-row">
-
-                    <span>
-                        Category
-                    </span>
-
-                    <strong>
-                        {{ grievance["category"] }}
-                    </strong>
-
-                </div>
-
-
-
-                <div class="result-row">
-
-                    <span>
-                        Description
-                    </span>
-
-                    <strong>
-                        {{ grievance["description"] }}
-                    </strong>
-
-                </div>
-
-
-
-                <div class="result-row">
-
-                    <span>
-                        Location
-                    </span>
-
-                    <strong>
-                        {{ grievance["location"] }}
-                    </strong>
-
-                </div>
-
-
-
-                <div class="result-row">
-
-                    <span>
-                        Status
-                    </span>
-
-                    <strong class="status-badge">
-
-                        {{ grievance["status"] }}
-
-                    </strong>
-
-                </div>
-
-
-
-                <div class="result-row">
-
-                    <span>
-                        Severity
-                    </span>
-
-                    <strong>
-
-                        {{ grievance["severity"] }}
-
-                    </strong>
-
-                </div>
-
+                <h2>Complaint Details</h2>
 
             </div>
 
 
-            {% endif %}
+            <div class="result-row">
 
+                <span>Grievance ID</span>
+
+                <strong>
+                    {{ grievance["grievance_id"] }}
+                </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <span>Category</span>
+
+                <strong>
+                    {{ grievance["category"] }}
+                </strong>
+
+            </div>
+
+
+            <div class="result-row description-row">
+
+                <span>Description</span>
+
+                <strong>
+                    {{ grievance["description"] }}
+                </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <span>Location</span>
+
+                <strong>
+                    {{ grievance["location"] }}
+                </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <span>Status</span>
+
+                <strong class="status-badge">
+                    {{ grievance["status"] }}
+                </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <span>Severity</span>
+
+                <strong>
+                    {{ grievance["severity"] }}
+                </strong>
+
+            </div>
 
         </div>
 
-    </section>
+        {% endif %}
+
+    </div>
+
+</section>
 
 
+<footer class="footer">
 
-    <!-- =========================
-         FOOTER
-         ========================= -->
+    <p>
+        © 2026 JanSeva AI.
+        AI-powered civic grievance management.
+    </p>
 
-    <footer class="footer">
-
-        <p>
-
-            © 2026 JanSeva AI.
-            AI-powered civic grievance management.
-
-        </p>
-
-    </footer>
+</footer>
 
 
 </body>
-
 </html>

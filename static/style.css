@@ -2441,3 +2441,227 @@ input {
         flex-direction: column;
     }
 }
+/* =========================
+   TRACK GRIEVANCE PAGE
+   ========================= */
+
+.track-page {
+    min-height: 100vh;
+    width: 100%;
+    padding: 65px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: #f7f9fc;
+}
+
+.track-card {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 45px 50px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+}
+
+.track-heading {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.track-label {
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #16834b;
+}
+
+.track-heading h1 {
+    margin: 0 0 12px;
+    font-size: 32px;
+    color: #172033;
+}
+
+.track-heading p {
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: #64748b;
+}
+
+
+/* TRACK FORM */
+
+.track-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.track-input-group {
+    flex: 1;
+}
+
+.track-input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.track-input-group input {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    color: #172033;
+    background: #ffffff;
+}
+
+.track-input-group input:focus {
+    border-color: #16834b;
+    box-shadow: 0 0 0 3px rgba(22, 131, 75, 0.10);
+}
+
+.track-button {
+    height: 48px;
+    padding: 0 22px;
+    border: none;
+    border-radius: 8px;
+    background: #172033;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.track-button:hover {
+    opacity: 0.92;
+}
+
+
+/* ERROR */
+
+.track-error {
+    margin: 18px 0;
+    padding: 13px 16px;
+    border-radius: 8px;
+    border: 1px solid #f1c5c5;
+    background: #fff5f5;
+    color: #b42318;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+/* RESULT */
+
+.grievance-result {
+    margin-top: 30px;
+    padding: 26px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.result-heading {
+    margin-bottom: 18px;
+}
+
+.result-heading span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #16834b;
+}
+
+.result-heading h2 {
+    margin: 5px 0 0;
+    font-size: 22px;
+    color: #172033;
+}
+
+.result-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 20px;
+    align-items: start;
+    padding: 15px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.result-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.result-row span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.result-row strong {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #172033;
+    text-align: left;
+    word-break: break-word;
+}
+
+
+/* STATUS */
+
+.status-badge {
+    display: inline-block;
+    width: fit-content;
+    padding: 5px 11px;
+    border-radius: 20px;
+    background: #e8f5ee;
+    color: #16834b !important;
+    font-size: 12px !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .track-page {
+        padding: 35px 15px;
+    }
+
+    .track-card {
+        padding: 32px 22px;
+    }
+
+    .track-heading h1 {
+        font-size: 27px;
+    }
+
+    .track-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .track-button {
+        width: 100%;
+    }
+
+    .result-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+}
