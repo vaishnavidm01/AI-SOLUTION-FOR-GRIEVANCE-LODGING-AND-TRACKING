@@ -9,7 +9,7 @@ from sklearn.metrics import classification_report
 
 
 # Load dataset
-df = pd.read_csv("../dataset/bmc_train.csv")
+df = pd.read_csv("dataset/bmc_train.csv")
 
 # Features available when a complaint is submitted
 features = [

@@ -4,6 +4,8 @@ import uuid
 import joblib
 
 from database.db import init_db, insert_grievance, get_connection
+from ai.severity_rules import predict_severity
+
 nlp_model = joblib.load("ai/models/nlp_category_model.pkl")
 app = Flask(__name__)
 CORS(app)
@@ -34,8 +36,22 @@ def lodge():
         location = request.form.get("location")
 
         # Predict complaint category using NLP model
+
+        # Predict complaint category using NLP model
         category = nlp_model.predict([description])[0]
         print("AI Predicted Category:", category)
+
+        # Estimate severity using rule-based logic
+        image = request.files.get("image")
+        has_photo = bool(image and image.filename)
+
+        severity = predict_severity(
+            description=description,
+            category=category,
+            has_photo=has_photo
+        )
+
+        print("Estimated Severity:", severity)
 
         image = request.files.get("image")
 
@@ -54,7 +70,8 @@ def lodge():
             category,
             description,
             location,
-            image_filename
+            image_filename,
+            severity
         )
 
         print("\n==============================")

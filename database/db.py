@@ -68,7 +68,8 @@ def insert_grievance(
     category,
     description,
     location,
-    image_filename
+    image_filename,
+    severity
 ):
 
     conn = get_connection()
