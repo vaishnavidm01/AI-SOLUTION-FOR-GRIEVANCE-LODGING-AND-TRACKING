@@ -1,14 +1,24 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 from flask_cors import CORS
 import uuid
 import joblib
-
+import os
+from werkzeug.utils import secure_filename
 from database.db import init_db, insert_grievance, get_connection
 from ai.severity_rules import predict_severity
 from ai.department_routing import assign_department
 
 nlp_model = joblib.load("ai/models/nlp_category_model.pkl")
+def allowed_file(filename):
+    return (
+        "." in filename
+        and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+    )
 app = Flask(__name__)
+UPLOAD_FOLDER = os.path.join(app.root_path, "uploads")
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
+app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024  # 5 MB
 CORS(app)
 
 # Initialize database
@@ -56,17 +66,34 @@ def lodge():
 
         print("Estimated Severity:", severity)
 
-        image = request.files.get("image")
+
 
         # Generate unique grievance ID
         grievance_id = "GRV-" + str(uuid.uuid4())[:8].upper()
 
         # Get image filename
+        # Save uploaded image with a safe, unique filename
+        # Save uploaded image with validation
         image_filename = None
 
         if image and image.filename:
-            image_filename = image.filename
+            if not allowed_file(image.filename):
+                return "Invalid image type. Please upload PNG, JPG, JPEG, or WEBP.", 400
 
+            original_filename = secure_filename(image.filename)
+
+            if not original_filename:
+                return "Invalid filename.", 400
+
+            extension = os.path.splitext(original_filename)[1].lower()
+            image_filename = f"{grievance_id}{extension}"
+
+            image_path = os.path.join(
+                app.config["UPLOAD_FOLDER"],
+                image_filename
+            )
+
+            image.save(image_path)
         # Save grievance in database
         insert_grievance(
             grievance_id,
@@ -102,6 +129,16 @@ def lodge():
 # =========================
 # TRACK GRIEVANCE
 # =========================
+# =========================
+# SERVE UPLOADED IMAGES
+# =========================
+
+@app.route("/uploads/<filename>")
+def uploaded_file(filename):
+    return send_from_directory(
+        app.config["UPLOAD_FOLDER"],
+        filename
+    )
 
 @app.route("/track", methods=["POST"])
 def track():
