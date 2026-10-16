@@ -2,30 +2,49 @@
 from severity_rules import predict_severity
 
 test_cases = [
-    {
-        "description": "There is a live wire hanging over the road.",
-        "category": "Street Light Failure",
-        "has_photo": False
-    },
-    {
-        "description": "There is a large pothole on the main road.",
-        "category": "Pothole / Road Damage",
-        "has_photo": True
-    },
-    {
-        "description": "Garbage has not been collected from our street.",
-        "category": "Solid Waste / Garbage",
-        "has_photo": False
-    }
+    (
+        "There is a live wire hanging over the road.",
+        "Mobility - Roads, Footpaths and Infrastructure",
+        False,
+        "Critical"
+    ),
+    (
+        "A person was injured due to an electric shock.",
+        "Electrical",
+        False,
+        "Critical"
+    ),
+    (
+        "There is a large pothole on the main road.",
+        "Mobility - Roads, Footpaths and Infrastructure",
+        False,
+        "High"
+    ),
+    (
+        "Sewage overflowing near the street.",
+        "Drainage Overflow",
+        False,
+        "High"
+    ),
+    (
+        "Garbage has not been collected from our street.",
+        "Sanitation",
+        False,
+        "Low"
+    ),
+    (
+        "A streetlight is not working.",
+        "Street Lighting",
+        True,
+        "Low"
+    ),
 ]
 
-for case in test_cases:
-    severity = predict_severity(
-        case["description"],
-        case["category"],
-        case["has_photo"]
-    )
+for description, category, has_photo, expected in test_cases:
+    predicted = predict_severity(description, category, has_photo)
 
-    print("Description:", case["description"])
-    print("Predicted severity:", severity)
-    print("-" * 40)
+    result = "PASS" if predicted == expected else "FAIL"
+
+    print(f"Description: {description}")
+    print(f"Expected: {expected} | Predicted: {predicted} | {result}")
+    print("-" * 60)
