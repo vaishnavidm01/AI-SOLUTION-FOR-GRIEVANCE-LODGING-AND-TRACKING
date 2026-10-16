@@ -63,6 +63,7 @@ def init_db():
 # INSERT GRIEVANCE
 # =========================
 
+
 def insert_grievance(
     grievance_id,
     category,
@@ -71,7 +72,6 @@ def insert_grievance(
     image_filename,
     severity
 ):
-
     conn = get_connection()
 
     conn.execute("""
@@ -81,18 +81,18 @@ def insert_grievance(
             category,
             description,
             location,
-            image_filename
+            image_filename,
+            severity
         )
-
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?)
     """, (
         grievance_id,
         category,
         description,
         location,
-        image_filename
+        image_filename,
+        severity
     ))
 
     conn.commit()
-
     conn.close()
