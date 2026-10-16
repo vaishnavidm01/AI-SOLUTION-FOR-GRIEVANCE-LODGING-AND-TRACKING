@@ -5,6 +5,7 @@ import joblib
 
 from database.db import init_db, insert_grievance, get_connection
 from ai.severity_rules import predict_severity
+from ai.department_routing import assign_department
 
 nlp_model = joblib.load("ai/models/nlp_category_model.pkl")
 app = Flask(__name__)
@@ -40,6 +41,8 @@ def lodge():
         # Predict complaint category using NLP model
         category = nlp_model.predict([description])[0]
         print("AI Predicted Category:", category)
+        department = assign_department(category)
+        print("Assigned Department:", department)
 
         # Estimate severity using rule-based logic
         image = request.files.get("image")
@@ -71,7 +74,8 @@ def lodge():
             description,
             location,
             image_filename,
-            severity
+            severity,
+            department
         )
 
         print("\n==============================")

@@ -49,10 +49,24 @@ def init_db():
 
             severity TEXT DEFAULT 'Pending',
 
+            department TEXT DEFAULT 'Unassigned',
+
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
         )
     """)
+    # Add department column to existing databases if needed
+    columns = [
+        row["name"]
+        for row in conn.execute(
+            "PRAGMA table_info(grievances)"
+        ).fetchall()
+    ]
+
+    if "department" not in columns:
+        conn.execute(
+            "ALTER TABLE grievances ADD COLUMN department TEXT DEFAULT 'Unassigned'"
+        )
 
     conn.commit()
 
@@ -64,13 +78,15 @@ def init_db():
 # =========================
 
 
+
 def insert_grievance(
     grievance_id,
     category,
     description,
     location,
     image_filename,
-    severity
+    severity,
+    department
 ):
     conn = get_connection()
 
@@ -82,16 +98,18 @@ def insert_grievance(
             description,
             location,
             image_filename,
-            severity
+            severity,
+            department
         )
-        VALUES (?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     """, (
         grievance_id,
         category,
         description,
         location,
         image_filename,
-        severity
+        severity,
+        department
     ))
 
     conn.commit()
