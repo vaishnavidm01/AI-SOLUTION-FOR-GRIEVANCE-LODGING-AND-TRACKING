@@ -7,6 +7,8 @@ from werkzeug.utils import secure_filename
 from database.db import init_db, insert_grievance, get_connection
 from ai.severity_rules import predict_severity
 from ai.department_routing import assign_department
+from ai.image_processing import process_grievance_image
+from ai.pothole_detection import detect_potholes
 
 nlp_model = joblib.load("ai/models/nlp_category_model.pkl")
 def allowed_file(filename):
@@ -94,6 +96,27 @@ def lodge():
             )
 
             image.save(image_path)
+
+            # OpenCV image preprocessing
+            processed_image = process_grievance_image(image_path)
+
+            if processed_image is not None:
+                print("OpenCV preprocessing successful!")
+
+            # YOLO pothole detection
+            pothole_result = detect_potholes(image_path)
+            print("YOLO Pothole Detection:", pothole_result)
+
+            if pothole_result.get("success"):
+                print(
+                    "Potholes detected:",
+                    pothole_result.get("potholes_detected", 0)
+                )
+            else:
+                print(
+                    "Pothole detection failed:",
+                    pothole_result.get("message")
+                )
         # Save grievance in database
         insert_grievance(
             grievance_id,
