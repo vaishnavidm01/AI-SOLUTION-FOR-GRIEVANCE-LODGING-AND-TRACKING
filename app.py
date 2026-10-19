@@ -9,6 +9,10 @@ from ai.severity_rules import predict_severity
 from ai.department_routing import assign_department
 from ai.image_processing import process_grievance_image
 from ai.pothole_detection import detect_potholes
+from ai.gps_cluster_service import (
+    cluster_saved_grievances,
+    get_cluster_summary
+)
 
 nlp_model = joblib.load("ai/models/nlp_category_model.pkl")
 def allowed_file(filename):
@@ -47,6 +51,15 @@ def lodge():
 
         description = request.form.get("description")
         location = request.form.get("location")
+        latitude = request.form.get("latitude") or None
+        longitude = request.form.get("longitude") or None
+
+        try:
+            latitude = float(latitude) if latitude is not None else None
+            longitude = float(longitude) if longitude is not None else None
+        except ValueError:
+            latitude = None
+            longitude = None
 
         # Predict complaint category using NLP model
 
@@ -77,6 +90,8 @@ def lodge():
         # Save uploaded image with a safe, unique filename
         # Save uploaded image with validation
         image_filename = None
+        potholes_detected = 0
+        detection_confidence = 0.0
 
         if image and image.filename:
             if not allowed_file(image.filename):
@@ -104,19 +119,25 @@ def lodge():
                 print("OpenCV preprocessing successful!")
 
             # YOLO pothole detection
+            # YOLO pothole detection
             pothole_result = detect_potholes(image_path)
             print("YOLO Pothole Detection:", pothole_result)
 
             if pothole_result.get("success"):
-                print(
-                    "Potholes detected:",
-                    pothole_result.get("potholes_detected", 0)
-                )
+                potholes_detected = pothole_result.get("potholes_detected", 0)
+
+                detections = pothole_result.get("detections", [])
+
+                if detections:
+                    detection_confidence = max(
+                        item.get("confidence", 0.0)
+                        for item in detections
+                    )
+
+                print("Potholes detected:", potholes_detected)
+                print("Detection confidence:", detection_confidence)
             else:
-                print(
-                    "Pothole detection failed:",
-                    pothole_result.get("message")
-                )
+                print("Pothole detection failed:", pothole_result.get("message"))
         # Save grievance in database
         insert_grievance(
             grievance_id,
@@ -125,7 +146,11 @@ def lodge():
             location,
             image_filename,
             severity,
-            department
+            department,
+            potholes_detected,
+            detection_confidence,
+            latitude,
+            longitude
         )
 
         print("\n==============================")
@@ -189,6 +214,23 @@ def track():
         grievance=None,
         error="Grievance ID not found. Please check your ID."
     )
+
+@app.route("/gps-map")
+def gps_map():
+    return render_template("gps_map.html")
+
+
+@app.route("/api/gps-grievances")
+def gps_grievances_api():
+    grievances = cluster_saved_grievances()
+    summary = get_cluster_summary()
+
+    return {
+        "total": summary["total_gps_grievances"],
+        "clusters_found": summary["clusters_found"],
+        "unclustered": summary["unclustered_grievances"],
+        "grievances": grievances
+    }
 
 
 # =========================

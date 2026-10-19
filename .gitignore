@@ -1,9 +1,21 @@
+
+# Python
 venv/
+.venv/
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Environment and IDE
 .env
-dataset/bmc_train.csv
 .idea/
-__pycache__/
-*.pyc
+
+# Dataset and database
+dataset/bmc_train.csv
 database/grievances.db
+
+# Uploaded grievance images
+uploads/
+
+# YOLO model weights
+ai/models/best.pt
+yolo11n.pt

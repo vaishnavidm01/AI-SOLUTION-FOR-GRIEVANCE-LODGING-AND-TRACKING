@@ -67,6 +67,26 @@ def init_db():
         conn.execute(
             "ALTER TABLE grievances ADD COLUMN department TEXT DEFAULT 'Unassigned'"
         )
+    # Add YOLO detection columns to existing databases if needed
+    if "potholes_detected" not in columns:
+        conn.execute(
+            "ALTER TABLE grievances ADD COLUMN potholes_detected INTEGER DEFAULT 0"
+        )
+
+    if "detection_confidence" not in columns:
+        conn.execute(
+            "ALTER TABLE grievances ADD COLUMN detection_confidence REAL DEFAULT 0"
+        )
+    # Add GPS coordinate columns to existing databases if needed
+    if "latitude" not in columns:
+        conn.execute(
+            "ALTER TABLE grievances ADD COLUMN latitude REAL"
+        )
+
+    if "longitude" not in columns:
+        conn.execute(
+            "ALTER TABLE grievances ADD COLUMN longitude REAL"
+        )
 
     conn.commit()
 
@@ -86,7 +106,11 @@ def insert_grievance(
     location,
     image_filename,
     severity,
-    department
+    department,
+    potholes_detected=0,
+    detection_confidence=0.0,
+    latitude = None,
+    longitude = None
 ):
     conn = get_connection()
 
@@ -99,9 +123,13 @@ def insert_grievance(
             location,
             image_filename,
             severity,
-            department
+            department,
+            potholes_detected,
+            detection_confidence,
+            latitude,
+            longitude
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         grievance_id,
         category,
@@ -109,8 +137,26 @@ def insert_grievance(
         location,
         image_filename,
         severity,
-        department
+        department,
+        potholes_detected,
+        detection_confidence,
+        latitude,
+        longitude
     ))
 
     conn.commit()
     conn.close()
+
+def get_grievances_with_gps():
+    conn = get_connection()
+
+    rows = conn.execute("""
+        SELECT grievance_id, category, latitude, longitude
+        FROM grievances
+        WHERE latitude IS NOT NULL
+          AND longitude IS NOT NULL
+    """).fetchall()
+
+    conn.close()
+
+    return [dict(row) for row in rows]

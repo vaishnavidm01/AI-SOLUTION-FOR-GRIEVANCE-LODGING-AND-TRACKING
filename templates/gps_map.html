@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JanSeva AI - GPS Grievance Map</title>
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 24px;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        #summary {
+            margin: 16px 0;
+            padding: 16px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        a {
+            color: #1769aa;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JanSeva AI — GPS Grievance Map</h1>
+    <p>View reported grievances and identify nearby complaint clusters.</p>
+
+    <div id="summary">
+        Loading grievance summary...
+    </div>
+
+    <div id="map"></div>
+
+    <p><a href="/">Back to Home</a></p>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        const map = L.map("map").setView([20.5937, 78.9629], 5);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors"
+        }).addTo(map);
+
+        fetch("/api/gps-grievances")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Could not load grievance data.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById("summary").textContent =
+                    `GPS grievances: ${data.total} | ` +
+                    `Clusters: ${data.clusters_found} | ` +
+                    `Unclustered: ${data.unclustered}`;
+
+                const bounds = [];
+
+                data.grievances.forEach(item => {
+                    const marker = L.marker([
+                        item.latitude,
+                        item.longitude
+                    ]).addTo(map);
+
+                    marker.bindPopup(
+                        `<b>Grievance:</b> ${item.grievance_id}<br>` +
+                        `<b>Category:</b> ${item.category}<br>` +
+                        `<b>Cluster:</b> ${
+                            item.cluster_id === -1
+                                ? "Unclustered"
+                                : item.cluster_id
+                        }`
+                    );
+
+                    bounds.push([item.latitude, item.longitude]);
+                });
+
+                if (bounds.length > 0) {
+                    map.fitBounds(bounds, { padding: [30, 30], maxZoom: 15 });
+                }
+            })
+            .catch(error => {
+                document.getElementById("summary").textContent =
+                    "Unable to load GPS grievances. Please check the server.";
+                console.error(error);
+            });
+    </script>
+</body>
+</html>

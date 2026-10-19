@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,24 +19,18 @@
 <header class="navbar">
 
     <div class="logo-area">
-
-        <div class="logo-icon">
-            JS
-        </div>
+        <div class="logo-icon">JS</div>
 
         <div>
             <h2>JanSeva AI</h2>
             <span>Smart Grievance Management</span>
         </div>
-
     </div>
 
     <nav>
-
         <a href="/">Home</a>
         <a href="/#services">Services</a>
         <a href="/#how">How It Works</a>
-
     </nav>
 
 </header>
@@ -44,24 +39,16 @@
 <!-- ================= PAGE HEADER ================= -->
 
 <section class="lodge-header">
-
     <div>
+        <span class="small-title">CITIZEN SERVICES</span>
 
-        <span class="small-title">
-            CITIZEN SERVICES
-        </span>
-
-        <h1>
-            Lodge a Grievance
-        </h1>
+        <h1>Lodge a Grievance</h1>
 
         <p>
             Tell us about the civic issue you have noticed.
             Our system will help analyse and track your complaint.
         </p>
-
     </div>
-
 </section>
 
 
@@ -71,87 +58,51 @@
 
     <div class="lodge-container">
 
-
         <!-- LEFT INFORMATION -->
 
         <div class="lodge-info">
 
             <div class="info-card">
-
-                <div class="info-icon">
-                    AI
-                </div>
-
-                <h3>
-                    AI-Assisted Analysis
-                </h3>
-
+                <div class="info-icon">AI</div>
+                <h3>AI-Assisted Analysis</h3>
                 <p>
                     Your complaint can be analysed to identify
                     the appropriate category and severity.
                 </p>
-
             </div>
 
-
             <div class="info-card">
-
-                <div class="info-icon">
-                    GPS
-                </div>
-
-                <h3>
-                    Location Based Reporting
-                </h3>
-
+                <div class="info-icon">GPS</div>
+                <h3>Location Based Reporting</h3>
                 <p>
                     Providing the location helps authorities
                     identify where the issue needs attention.
                 </p>
-
             </div>
 
-
             <div class="info-card">
-
-                <div class="info-icon">
-                    ID
-                </div>
-
-                <h3>
-                    Track Your Complaint
-                </h3>
-
+                <div class="info-icon">ID</div>
+                <h3>Track Your Complaint</h3>
                 <p>
                     After submitting your grievance, you can
                     use your grievance ID to track its progress.
                 </p>
-
             </div>
 
         </div>
 
 
-        <!-- FORM -->
+        <!-- GRIEVANCE FORM -->
 
         <div class="grievance-form-card">
 
             <div class="form-heading">
+                <span class="small-title">STEP 1</span>
 
-                <span class="small-title">
-                    STEP 1
-                </span>
+                <h2>Tell us about the problem</h2>
 
-                <h2>
-                    Tell us about the problem
-                </h2>
-
-                <p>
-                    Please provide accurate information.
-                </p>
-
+                <p>Please provide accurate information.</p>
             </div>
-
 
             <form
                 action="/lodge"
@@ -159,37 +110,30 @@
                 enctype="multipart/form-data"
             >
 
-
                 <!-- CATEGORY -->
 
                 <div class="form-group">
 
-                    <label for="category">
-                        Issue Category
-                    </label>
+                    <label for="category">Issue Category</label>
 
                     <select
                         id="category"
                         name="category"
                         style="display: none;"
                     >
-
-                        <option value="">
-                            Select an issue
-                        </option>
+                        <option value="">Select an issue</option>
 
                         <option value="Road Maintenance">
-                             Road Maintenance
+                            Road Maintenance
                         </option>
 
                         <option value="Water Leakage">
-                             Water Leakage
+                            Water Leakage
                         </option>
 
                         <option value="Garbage / Sanitation">
                             Garbage / Sanitation
                         </option>
-
                     </select>
 
                 </div>
@@ -199,9 +143,7 @@
 
                 <div class="form-group">
 
-                    <label for="description">
-                        Describe the Issue
-                    </label>
+                    <label for="description">Describe the Issue</label>
 
                     <textarea
                         id="description"
@@ -222,9 +164,7 @@
 
                 <div class="form-group">
 
-                    <label for="location">
-                        Location
-                    </label>
+                    <label for="location">Location</label>
 
                     <div class="location-input">
 
@@ -236,6 +176,20 @@
                             required
                         >
 
+                        <!-- Hidden GPS coordinates -->
+
+                        <input
+                            type="hidden"
+                            id="latitude"
+                            name="latitude"
+                        >
+
+                        <input
+                            type="hidden"
+                            id="longitude"
+                            name="longitude"
+                        >
+
                         <button
                             type="button"
                             onclick="getLocation()"
@@ -245,7 +199,7 @@
 
                     </div>
 
-                    <small id="location-status">
+                    <small id="location-status" role="status">
                         You can enter the location manually.
                     </small>
 
@@ -256,23 +210,15 @@
 
                 <div class="form-group">
 
-                    <label for="image">
-                        Upload Image
-                    </label>
+                    <label for="image">Upload Image</label>
 
                     <div class="upload-area">
 
-                        <div class="upload-icon">
-                            IMG
-                        </div>
+                        <div class="upload-icon">IMG</div>
 
-                        <h4>
-                            Upload a photo of the issue
-                        </h4>
+                        <h4>Upload a photo of the issue</h4>
 
-                        <p>
-                            JPG, JPEG or PNG
-                        </p>
+                        <p>JPG, JPEG or PNG</p>
 
                         <input
                             type="file"
@@ -294,7 +240,6 @@
                 >
                     Submit Grievance →
                 </button>
-
 
                 <p class="privacy-note">
                     Your submitted information is used only
@@ -318,9 +263,7 @@
 
         <div class="footer-brand">
 
-            <div class="footer-logo">
-                🏛️
-            </div>
+            <div class="footer-logo">🏛️</div>
 
             <div>
                 <h3>JanSeva AI</h3>
@@ -333,36 +276,17 @@
 
         </div>
 
-
         <div class="footer-links">
-
-            <a href="/">
-                Home
-            </a>
-
-            <a href="/#services">
-                Services
-            </a>
-
-            <a href="/#how">
-                How It Works
-            </a>
-
+            <a href="/">Home</a>
+            <a href="/#services">Services</a>
+            <a href="/#how">How It Works</a>
         </div>
 
     </div>
 
-
     <div class="footer-bottom">
-
-        <span>
-            © 2026 JanSeva AI
-        </span>
-
-        <span>
-            Built for smarter civic services.
-        </span>
-
+        <span>© 2026 JanSeva AI</span>
+        <span>Built for smarter civic services.</span>
     </div>
 
 </footer>
@@ -371,49 +295,61 @@
 <!-- ================= LOCATION SCRIPT ================= -->
 
 <script>
-
 function getLocation() {
-
     const status = document.getElementById("location-status");
+    const locationInput = document.getElementById("location");
+    const latitudeInput = document.getElementById("latitude");
+    const longitudeInput = document.getElementById("longitude");
 
     if (!navigator.geolocation) {
-
-        status.innerText =
+        status.textContent =
             "Location detection is not supported by your browser.";
-
         return;
     }
 
-    status.innerText = "Detecting your location...";
+    status.textContent = "Detecting your location...";
 
     navigator.geolocation.getCurrentPosition(
-
         function(position) {
-
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 
-            document.getElementById("location").value =
-                latitude + ", " + longitude;
+            latitudeInput.value = latitude;
+            longitudeInput.value = longitude;
 
-            status.innerText =
-                "✓ Location detected successfully.";
+            locationInput.value = latitude + ", " + longitude;
 
+            status.textContent =
+                "Location detected successfully.";
         },
 
-        function() {
+        function(error) {
+            latitudeInput.value = "";
+            longitudeInput.value = "";
 
-            status.innerText =
-                "Unable to detect location. Please enter it manually.";
+            if (error.code === error.PERMISSION_DENIED) {
+                status.textContent =
+                    "Location permission denied. Allow location access in your browser settings.";
+            } else if (error.code === error.POSITION_UNAVAILABLE) {
+                status.textContent =
+                    "Your location is unavailable. Please try again or enter it manually.";
+            } else if (error.code === error.TIMEOUT) {
+                status.textContent =
+                    "Location request timed out. Please try again.";
+            } else {
+                status.textContent =
+                    "Unable to detect location. Please enter it manually.";
+            }
+        },
 
+        {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
         }
-
     );
-
 }
-
 </script>
 
 </body>
-
 </html>

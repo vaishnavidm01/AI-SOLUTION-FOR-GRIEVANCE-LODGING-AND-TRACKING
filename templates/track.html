@@ -200,6 +200,29 @@
                 </strong>
 
             </div>
+            {% if grievance["image_filename"] and grievance["potholes_detected"] > 0 %}
+
+            <div class="result-row">
+
+                <span>AI Pothole Detection</span>
+
+                <strong>
+                    {{ grievance["potholes_detected"] }} pothole(s) detected
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>Detection Confidence</span>
+
+                <strong>
+                    {{ "%.2f"|format(grievance["detection_confidence"] * 100) }}%
+                </strong>
+
+            </div>
+
+        {% endif %}
 
         </div>
 
