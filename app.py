@@ -51,6 +51,15 @@ def lodge():
 
         description = request.form.get("description")
         location = request.form.get("location")
+        # Validate required fields
+        if not description or not description.strip():
+            return "Please enter a grievance description.", 400
+
+        if not location or not location.strip():
+            return "Please enter the grievance location.", 400
+
+        description = description.strip()
+        location = location.strip()
         latitude = request.form.get("latitude") or None
         longitude = request.form.get("longitude") or None
 
@@ -58,6 +67,20 @@ def lodge():
             latitude = float(latitude) if latitude is not None else None
             longitude = float(longitude) if longitude is not None else None
         except ValueError:
+            latitude = None
+            longitude = None
+        # Validate GPS coordinate ranges
+        if latitude is not None and longitude is not None:
+
+            if not (-90 <= latitude <= 90):
+                latitude = None
+                longitude = None
+
+            elif not (-180 <= longitude <= 180):
+                latitude = None
+                longitude = None
+
+        else:
             latitude = None
             longitude = None
 
@@ -115,9 +138,11 @@ def lodge():
             # OpenCV image preprocessing
             processed_image = process_grievance_image(image_path)
 
-            if processed_image is not None:
-                print("OpenCV preprocessing successful!")
+            if processed_image is None:
+                os.remove(image_path)
+                return "Uploaded file is not a valid or readable image.", 400
 
+            print("OpenCV preprocessing successful!")
             # YOLO pothole detection
             # YOLO pothole detection
             pothole_result = detect_potholes(image_path)
