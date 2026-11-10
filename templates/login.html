@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | JanSeva AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo-area">
+        <div class="logo-icon">JS</div>
+        <div>
+            <h2>JanSeva AI</h2>
+            <span>Smart Grievance Management</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/register">Register</a>
+    </nav>
+</header>
+
+<section class="auth-section">
+
+    <div class="auth-card">
+
+        <div class="auth-heading">
+            <span class="small-title">WELCOME BACK</span>
+            <h1>Login to Your Account</h1>
+            <p>
+                Access your dashboard to lodge grievances
+                and track their progress.
+            </p>
+        </div>
+
+        {% if error %}
+        <div class="auth-error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('login') }}" method="POST">
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="submit-grievance">
+                Login
+            </button>
+
+        </form>
+
+        <p class="auth-switch">
+            Don't have an account?
+            <a href="/register">Register here</a>
+        </p>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+    <p>© 2026 JanSeva AI. AI-powered civic grievance management.</p>
+</footer>
+
+</body>
+</html>

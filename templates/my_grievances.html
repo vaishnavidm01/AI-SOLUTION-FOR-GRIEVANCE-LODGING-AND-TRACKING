@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Grievances | JanSeva AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">JanSeva AI</div>
+
+    <nav>
+        <a href="{{ url_for('citizen_dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+</header>
+
+<main class="auth-section">
+
+    <section class="auth-card">
+
+        <h1 class="auth-heading">My Grievances</h1>
+
+        <p class="small-title">
+            View the grievances submitted through your account.
+        </p>
+
+        {% if grievances %}
+
+            {% for grievance in grievances %}
+
+                <div class="grievance-card">
+
+                    <h3>{{ grievance.grievance_id }}</h3>
+
+                    <p>
+                        <strong>Category:</strong>
+                        {{ grievance.category }}
+                    </p>
+
+                    <p>
+                        <strong>Description:</strong>
+                        {{ grievance.description }}
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong>
+                        {{ grievance.location or "Not provided" }}
+                    </p>
+
+                    <p>
+                        <strong>Severity:</strong>
+                        {{ grievance.severity }}
+                    </p>
+
+                    <p>
+                        <strong>Department:</strong>
+                        {{ grievance.department }}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ grievance.status }}
+                    </p>
+
+                    <p>
+                        <strong>Submitted:</strong>
+                        {{ grievance.created_at }}
+                    </p>
+
+                    <a href="{{ url_for('track') }}"
+                       class="submit-grievance">
+                        Track Grievance
+                    </a>
+
+                </div>
+
+                <hr>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>
+                You haven't submitted any grievances yet.
+            </p>
+
+            <a href="{{ url_for('home') }}"
+               class="submit-grievance">
+                Lodge Your First Grievance
+            </a>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+</body>
+</html>

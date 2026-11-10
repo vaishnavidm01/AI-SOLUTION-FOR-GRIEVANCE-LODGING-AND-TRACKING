@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | JanSeva AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">JanSeva AI</div>
+
+    <nav>
+        <a href="{{ url_for('gps_map') }}">GPS Map</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+</header>
+
+<main class="admin-section">
+
+    <section class="admin-container">
+
+        <h1 class="auth-heading">
+            Government Admin Dashboard
+        </h1>
+
+        <p class="small-title">
+            Manage and monitor public grievances
+        </p>
+
+
+        <!-- GRIEVANCE OVERVIEW -->
+
+        <h2>Grievance Overview</h2>
+
+        <div class="dashboard-stats">
+
+            <div class="stat-card">
+                <h3>Total Grievances</h3>
+                <p>{{ total_grievances }}</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Road Complaints</h3>
+                <p>{{ road_count }}</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Water Complaints</h3>
+                <p>{{ water_count }}</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Garbage Complaints</h3>
+                <p>{{ garbage_count }}</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Critical Grievances</h3>
+                <p>{{ critical_count }}</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending Grievances</h3>
+                <p>{{ pending_count }}</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Resolved Grievances</h3>
+                <p>{{ resolved_count }}</p>
+            </div>
+
+        </div>
+
+        <hr>
+
+
+        <!-- ALL GRIEVANCES -->
+
+        <h2 id="grievances">All Grievances</h2>
+
+        {% if grievances %}
+
+        <div class="grievance-grid">
+
+            {% for grievance in grievances %}
+
+            <div class="grievance-card">
+
+                <h3>{{ grievance.grievance_id }}</h3>
+
+                <p>
+                    <strong>Department:</strong>
+                    {{ grievance.department or "Unassigned" }}
+                </p>
+
+                <p>
+                    <strong>Category:</strong>
+                    {{ grievance.category }}
+                </p>
+
+                <p>
+                    <strong>Description:</strong>
+                    {{ grievance.description }}
+                </p>
+
+                <p>
+                    <strong>Location:</strong>
+                    {{ grievance.location or "Not provided" }}
+                </p>
+
+                <p>
+                    <strong>Severity:</strong>
+                    {{ grievance.severity }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ grievance.status }}
+                </p>
+
+                <p>
+                    <strong>Submitted:</strong>
+                    {{ grievance.created_at }}
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <p>No grievances have been submitted yet.</p>
+
+        {% endif %}
+
+        <hr>
+
+
+        <!-- GPS CLUSTER LINK -->
+
+        <a href="{{ url_for('gps_map') }}"
+           class="submit-grievance">
+            View GPS Clusters
+        </a>
+
+    </section>
+
+</main>
+
+</body>
+</html>
